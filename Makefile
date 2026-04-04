@@ -1,16 +1,25 @@
-.PHONY: setup test lint format build
+.PHONY: test lint format install dev clean
 
-setup:
-	python -m venv .venv && . .venv/bin/activate && pip install -U pip && pip install -e .
+install:
+	pip install -r requirements.txt
 
-lint:
-	. .venv/bin/activate && python -m pip install black isort ruff && ruff check spectra_dx && black --check spectra_dx && isort --check-only spectra_dx
-
-format:
-	. .venv/bin/activate && python -m pip install black isort && black spectra_dx && isort spectra_dx
+dev:
+	pip install -r requirements.txt -r requirements-test.txt
 
 test:
-	. .venv/bin/activate && python -m pip install pytest && pytest -q
+	pytest tests/ -v --tb=short
 
-build:
-	python -m build
+test-cov:
+	pytest tests/ -v --cov=. --cov-report=html --cov-report=term
+
+lint:
+	ruff check .
+	mypy . --ignore-missing-imports
+
+format:
+	ruff format .
+
+clean:
+	find . -type d -name __pycache__ -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
+	rm -rf .pytest_cache .mypy_cache htmlcov .coverage
