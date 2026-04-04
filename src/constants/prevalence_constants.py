@@ -1,0 +1,26 @@
+"""Prevalence constants."""
+
+# Status codes
+PREVALENCE_STATUS_ACTIVE = "active"
+PREVALENCE_STATUS_INACTIVE = "inactive"
+PREVALENCE_STATUS_PENDING = "pending"
+PREVALENCE_STATUS_ERROR = "error"
+
+# Limits
+PREVALENCE_MAX_BATCH_SIZE = 1000
+PREVALENCE_DEFAULT_TIMEOUT = 30
+PREVALENCE_MAX_RETRIES = 3
+PREVALENCE_CACHE_TTL = 300
+
+# Field names
+PREVALENCE_FIELDS = [
+    "id", "name", "type", "status",
+    "metadata", "created_at", "updated_at",
+]
+
+ALL_STATUSES = [
+    PREVALENCE_STATUS_ACTIVE,
+    PREVALENCE_STATUS_INACTIVE,
+    PREVALENCE_STATUS_PENDING,
+    PREVALENCE_STATUS_ERROR,
+]
